@@ -3,10 +3,10 @@
     <div>
       <logo />
       <h1 class="title">
-        mt-web
+        mt-web sdsdwas
       </h1>
       <h2 class="subtitle">
-        My badass Nuxt.js project
+        My badass Nuxt.js project xassas
       </h2>
       <div class="links">
         <a
@@ -18,7 +18,7 @@
           href="https://github.com/nuxt/nuxt.js"
           target="_blank"
           class="button--grey"
-        >GitHub</a>
+        >GitHubcccc</a>
       </div>
     </div>
   </section>
