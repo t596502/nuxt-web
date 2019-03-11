@@ -23,10 +23,10 @@
                         </dd>
                     </dl>
                     <dl
-                            v-for="(item,index) in searchList " :key="index"
-                            v-if="isSearchList"
+
                             class="searchList" >
-                        <dd>
+                        <dd v-for="(item,index) in searchList " :key="index"
+                            v-if="isSearchList">
                             {{item}}
                         </dd>
                     </dl>
