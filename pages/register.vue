@@ -89,11 +89,66 @@
             }
         },
         methods:{
-            sendMsg(){},
+            sendMsg(){
+                let namePass;
+                let emailPass;
+                if(this.timerid) return
+                this.$refs['ruleForm'].validateField('name',(valid)=>{
+                    namePass = valid
+                });
+                if(namePass) return false
+                this.$refs['ruleForm'].validateField('email',(valid)=>{
+                    emailPass = valid
+                });
+                if(!namePass && !emailPass){
+                    const params={username:this.ruleForm.name,email:this.ruleForm.email}
+                    this.$axios.post('/users/verify',params).then((res)=>{
+                        console.log(res);
+                        const {status,data} = res
+                        if(status === 200 && data && data.code === 0){
+                            let count = 60;
+                            this.statusMsg = `验证码已发送,剩余${count--}秒`;
+                            this.timerid = setInterval(()=> {
+                                this.statusMsg = `验证码已发送,剩余${count--}秒`;
+                                if (count === 0) {
+                                    this.statusMsg = ''
+                                    clearInterval(this.timerid)
+                                    this.timerid = null
+                                }
+                            }, 1000)
+                        } else {
+                            this.error = data.msg
+                            setTimeout(()=>{
+                                this.error = ''
+                            },1500)
+                        }
+                    })
+                }
+
+            },
             primary(){
 
             },
-            register(){},
+            register(){
+                const params= {
+                    username:this.ruleForm.name,
+                    password:this.ruleForm.cpwd,
+                    email:this.ruleForm.email,
+                    code:this.ruleForm.code
+                };
+              this.$axios.post('/users/signup',params).then(res=>{
+                  console.log(res);
+                  const {status,data} = res
+                  if(status === 200 && data && data.code === 0) {
+                      this.$router.push({path:'/'})
+                  }else {
+                      this.error = data.msg
+                      setTimeout(()=>{
+                          this.error = ''
+                      },1500)
+                  }
+              })
+            },
         }
     }
 </script>

@@ -22,6 +22,17 @@
             return{
                 user:""
             }
+        },
+        mounted() {
+            this.$axios.get('users/getUser').then(res=>{
+                let {status,data} = res
+                console.log(res);
+                if(status ===200){
+                        this.user = data.user
+                }else {
+                    console.log('服务器异常');
+                }
+            })
         }
     }
 </script>

@@ -67,5 +67,5 @@ module.exports = {
 
     }
   },
-  cache: false
+  // cache: false
 }
