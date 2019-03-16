@@ -140,7 +140,7 @@
                   console.log(res);
                   const {status,data} = res
                   if(status === 200 && data && data.code === 0) {
-                      this.$router.push({path:'/'})
+                      this.login()
                   }else {
                       this.error = data.msg
                       setTimeout(()=>{
@@ -149,6 +149,29 @@
                   }
               })
             },
+            login(){
+                this.$axios.post('/users/signin',{
+                    username:window.encodeURIComponent(this.ruleForm.name),
+                    password:this.ruleForm.cpwd
+                }).then((res)=>{
+                    const {status,data} = res
+                    if(status === 200){
+                        if(data&&data.code===0){
+                            this.$router.replace({path:'/'})
+                        }else{
+                            this.error=data.msg
+                        }
+                    }else{
+                        this.error=`服务器出错`
+
+                    }
+                    if(this.error){
+                        setTimeout(()=>{
+                            this.error = ''
+                        },2000)
+                    }
+                })
+            }
         }
     }
 </script>

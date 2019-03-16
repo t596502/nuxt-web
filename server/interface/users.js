@@ -110,7 +110,7 @@ router.post('/signup',async(ctx,next)=>{
     try{
         let nuser = await User.create({username,password:MD5(password),email})
         if(nuser){
-            let res = await axios.post('/users/signin',{username,password:MD5(password)})
+            let res = await axios.post('/users/signin',{username,password})
             if(res.data && res.data.code === 0){
                 ctx.body = {
                     code: 0,
@@ -143,6 +143,7 @@ router.post('/signin',async(ctx,next)=>{
                 code:-1,
                 msg:err
             }
+            console.log(err)
         }else{
             if(user){
                 ctx.body = {
@@ -152,6 +153,7 @@ router.post('/signin',async(ctx,next)=>{
                 };
                 return ctx.login(user)
             }else {
+                console.log(info)
                 ctx.body = {
                     code:1,
                     msg:info
@@ -160,6 +162,20 @@ router.post('/signin',async(ctx,next)=>{
         }
     })(ctx,next)
 });
+// 退出
+router.get('/exit', async (ctx, next) => {
+    await ctx.logout()
+    if (!ctx.isAuthenticated()) { // 检查是不是登录状态
+        ctx.body = {
+            code: 0
+        }
+    } else {
+        ctx.body = {
+            code: -1
+        }
+    }
+})
+// 用户信息
 router.get('/getUser',async(ctx,next)=> {
     console.log('getUser');
     if(ctx.isAuthenticated()){
