@@ -189,7 +189,6 @@ router.get('/getUser',async(ctx,next)=> {
             user:'',
             email:''
         }
-        console.log('没有登录');
     }
 })
 export default router

@@ -113,6 +113,11 @@
 
 <script>
     export default {
+        mounted() {
+            // this.$axios.get('/geo/getPosition').then(res=>{
+            //     console.log(res);
+            // })
+        }
     }
 </script>
 
