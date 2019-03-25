@@ -4,7 +4,7 @@
             @mouseleave="itemLeave"
         >
             <dt>全部分类</dt>
-            <dd v-for="(item,idx) in menu" :key="idx"
+            <dd v-for="(item,idx) in home.menu" :key="idx"
                 @mouseenter="itemEnter"
             >
                 <i :class="item.type"/>{{item.name}}<span class="arrow"/>
@@ -17,17 +17,20 @@
         >
             <template v-for="item in curdetail.child">
                 <h4>{{item.title}}</h4>
-                    <span v-for="(v, idx) in item.child" :key="idx">{{v}}</span>
+                    <span v-for="(v, index) in item.child">{{v}}</span>
             </template>
         </div>
     </div>
 </template>
 
 <script>
+    import {mapState} from 'vuex'
     export default {
         data() {
             return {
-                menu: [{
+                menu: [
+
+                    {
                     type: 'food',
                     name: '美食',
                     child:[{
@@ -48,13 +51,18 @@
                         title:'酒店星级',
                         child:['经济型','舒适/三星','高档/四星','豪华/五星']
                     }]
-                }],
+                }
+                ],
                 kind:''
             }
         },
+        mounted(){
+        },
         computed:{
+            ...mapState(['home']),
+
             curdetail(){
-                return this.menu.filter(item=> item.type === this.kind)[0]
+                return this.home.menu.filter(item=> item.type === this.kind)[0]
             }
         },
         methods:{

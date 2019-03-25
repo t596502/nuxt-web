@@ -18,14 +18,14 @@
                             v-if="isHotPlace"
                             class="hotPlace">
                         <dt>热门搜索</dt>
-                        <dd v-for="(item,index) in hotPlace" :key="index">
+                        <dd style="display: block" v-for="(item,index) in home.hotPlace.slice(0,5)" :key="index">
                             <a >{{item}}</a>
                         </dd>
                     </dl>
                     <dl
 
                             class="searchList" >
-                        <dd v-for="(item,index) in searchList " :key="index"
+                        <dd v-for="(item,index) in searchList.name " :key="index"
                             v-if="isSearchList">
                             {{item}}
                         </dd>
@@ -68,6 +68,8 @@
 </template>
 
 <script>
+    import _ from 'lodash'
+    import {mapState} from 'vuex'
     export default {
         name: "searchbar",
         data(){
@@ -79,6 +81,7 @@
             }
         },
         computed:{
+            ...mapState(['home']),
             isHotPlace(){
                 return this.isFocus && !this.search
             },
@@ -95,9 +98,17 @@
                     this.isFocus=false
                 },200)
             },
-            input () {
-
-            }
+            input: _.debounce(async function() {
+                let city=this.$store.state.geo.position.city.replace('市','')
+                let {status,data:{top}} = await this.$axios('/search/top',{
+                    params:{
+                        input:this.search,
+                        city
+                    }
+                })
+                console.log(top);
+                this.searchList = top.slice(0,10)
+            },300)
         }
 
     }
