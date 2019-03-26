@@ -25,18 +25,17 @@
                     <dl
 
                             class="searchList" >
-                        <dd v-for="(item,index) in searchList.name " :key="index"
+                        <dd v-for="(item,index) in searchList " :key="index"
                             v-if="isSearchList">
-                            {{item}}
+                            {{item.name}}
                         </dd>
                     </dl>
                 </div>
                 <!--搜索栏底部链接-->
                 <p class="suggest">
-                    <a>cdscscs</a>
-                    <a>cdscscs</a>
-                    <a>cdscscs</a>
-                    <a>cdscscs</a>
+                    <a v-for="(item,index) in home.hotPlace.slice(0,5)"
+                       :key="index"
+                       href="javascript:;" >{{item}}</a>
                 </p>
                 <ul class="nav">
                     <li><nuxt-link
@@ -81,7 +80,7 @@
             }
         },
         computed:{
-            ...mapState(['home']),
+            ...mapState(['home','geo']),
             isHotPlace(){
                 return this.isFocus && !this.search
             },
@@ -99,15 +98,18 @@
                 },200)
             },
             input: _.debounce(async function() {
-                let city=this.$store.state.geo.position.city.replace('市','')
-                let {status,data:{top}} = await this.$axios('/search/top',{
+                let city=this.geo.position.city.replace('市','')
+                let {status,data:{top,code}} = await this.$axios('/search/top',{
                     params:{
                         input:this.search,
                         city
                     }
                 })
-                console.log(top);
-                this.searchList = top.slice(0,10)
+                if(status === 200 && code === 0){
+                    this.searchList = top.slice(0,10)
+                    console.log(this.searchList);
+                }
+
             },300)
         }
 

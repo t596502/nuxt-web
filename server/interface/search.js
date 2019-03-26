@@ -10,15 +10,13 @@ router.get('/top',async (ctx)=>{
             ctx.body={
                 code:-1,
                 msg:'请输入城市'
-            }
+            };
             return
         }
-        console.log(new RegExp(ctx.query.input));
         let top = await Poi.find({
             'name':new RegExp(ctx.query.input),
             city:ctx.query.city
         }).limit(10);
-        console.log(top);
         const newTop = top.map(item=>{
             return {
                 name:item.name,
@@ -34,7 +32,6 @@ router.get('/top',async (ctx)=>{
             code:-1,
             top:'服务器繁忙，稍后重试'
         }
-        console.log(e);
     }
 })
 router.get('/hotPlace', async (ctx, next) => {
