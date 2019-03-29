@@ -2,8 +2,9 @@
     <div class="search-panel">
         <el-row class="m-header-searchbar">
             <el-col :span="3" class="left">
-                <img src="//s0.meituan.net/bs/fe-web-meituan/e5eeaef/img/logo.png"
-                     alt="美团">
+                <nuxt-link to="/">
+                    <img src="//s0.meituan.net/bs/fe-web-meituan/e5eeaef/img/logo.png" />
+                </nuxt-link>
             </el-col>
             <el-col :span="15" class="center">
                 <div class="wrapper">
@@ -19,7 +20,7 @@
                             class="hotPlace">
                         <dt>热门搜索</dt>
                         <dd style="display: block" v-for="(item,index) in home.hotPlace.slice(0,5)" :key="index">
-                            <a >{{item}}</a>
+                            <nuxt-link :to="'/products?keyword=' + item">{{item}}</nuxt-link>
                         </dd>
                     </dl>
                     <dl
@@ -33,9 +34,9 @@
                 </div>
                 <!--搜索栏底部链接-->
                 <p class="suggest">
-                    <a v-for="(item,index) in home.hotPlace.slice(0,5)"
+                    <nuxt-link v-for="(item,index) in home.hotPlace.slice(0,5)"
                        :key="index"
-                       href="javascript:;" >{{item}}</a>
+                       :to="'/products?keyword=' + item" >{{item}}</nuxt-link>
                 </p>
                 <ul class="nav">
                     <li><nuxt-link

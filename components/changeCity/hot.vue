@@ -4,7 +4,7 @@
             <dt>热门城市：</dt>
             <dd
                     v-for="item in flter"
-                    :key="item.id">{{ item.name==='市辖区'?item.province:item.name }}</dd>
+                    :key="item.id">{{ item.name==='辖区'?item.province:item.name }}</dd>
         </dl>
     </div>
 </template>
@@ -21,11 +21,12 @@
         computed:{
             flter(){
                 this.hotCity.forEach(item=>{
-                    if(item.province.indexOf('市') > -1){
-                        item.province.replace('市','')
+                    for(let k in item){
+                        if(item[k].indexOf('市') > -1){
+                            item[k] = item[k].replace('市','')
+                        }
                     }
-                })
-                console.log(this.hotCity);
+                });
                 return this.hotCity
             },
         },

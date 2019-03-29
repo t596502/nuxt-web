@@ -98,5 +98,29 @@ router.get('/hotCity', async (ctx) => {
     ctx.body = {
       hots: nList
     }
-})
+});
+router.get('/city',async (ctx)=>{
+    try{
+        let city = []
+        const result = await City.find({},['value']);
+        result.forEach(item=>{
+            city = city.concat(item.value)
+        })
+        city.forEach(item=>{
+            if(item.name == '市辖区' || item.name == '省直辖县级行政区划'){
+                item.name = item.province
+            }
+        });
+        ctx.body={
+            code: 0,
+            city
+        }
+    }catch(e){
+        console.log(e);
+        ctx.body={
+            code:-1,
+            msg:'服务器繁忙，请稍候重试'
+        }
+    }
+});
 export default router

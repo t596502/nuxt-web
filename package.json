@@ -15,6 +15,7 @@
     "axios": "^0.18.0",
     "cross-env": "^5.2.0",
     "element-ui": "^2.4.11",
+    "js-pinyin": "^0.1.9",
     "koa": "^2.6.2",
     "koa-passport": "^4.1.1",
     "koa-redis": "^3.1.3",
