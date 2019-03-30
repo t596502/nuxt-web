@@ -1,6 +1,6 @@
-import moogoose from 'mongoose'
+import mongoose from 'mongoose'
 
-const Schema = moogoose.Schema;
+const Schema = mongoose.Schema;
 
 const City = new Schema({
     value:{
@@ -12,4 +12,4 @@ const City = new Schema({
         require:true
     }
 });
-export default moogoose.model('City',City)
+export default mongoose.model('City',City)

@@ -14,7 +14,9 @@
                             @blur="blur"
                             v-model="search"
                             placeholder="搜索商家或地点" />
-                    <button class="el-button el-button--primary"><i class="el-icon-search"/></button>
+                    <nuxt-link :to="'/products?keyword=' + search">
+                        <button class="el-button el-button--primary"><i class="el-icon-search"/></button>
+                    </nuxt-link>
                     <dl
                             v-if="isHotPlace"
                             class="hotPlace">

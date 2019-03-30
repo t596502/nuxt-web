@@ -4,7 +4,7 @@ import Poi from '../dbs/models/poi'
 const router = new Route({prefix: '/search'});
 
 router.get('/top',async (ctx)=>{
-
+    console.log(1);
     try{
         if(!ctx.query.city) {
             ctx.body={
@@ -13,20 +13,26 @@ router.get('/top',async (ctx)=>{
             };
             return
         }
-        let top = await Poi.find({
-            'name':new RegExp(ctx.query.input),
-            city:ctx.query.city
-        }).limit(10);
-        const newTop = top.map(item=>{
-            return {
-                name:item.name,
-                type:item.type
+        if(ctx.query.list){
+            let list = await Poi.find();
+            ctx.body={
+                code:0,
+                list
             }
-        });
-        ctx.body={
-            code:0,
-            top:newTop
+        }else {
+            let top = await Poi.find({'name':new RegExp(ctx.query.input), city:ctx.query.city}).limit(10);
+            const newTop = top.map(item=>{
+                return {
+                    name:item.name,
+                    type:item.type
+                }
+            });
+            ctx.body={
+                code:0,
+                top:newTop
+            }
         }
+
     }catch (e) {
         ctx.body={
             code:-1,

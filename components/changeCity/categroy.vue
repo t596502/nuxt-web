@@ -21,7 +21,6 @@
     import pyjs from 'js-pinyin'
 
     export default {
-        name: "categroy",
         data() {
             return {
                 block: [],

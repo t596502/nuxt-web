@@ -26,7 +26,8 @@
 </template>
 
 <script>
-import iselect from './iselect.vue'
+import iselect from './iselect.vue';
+
 export default {
   components: {
     iselect
