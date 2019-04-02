@@ -106,7 +106,6 @@ router.post('/signup',async(ctx,next)=>{
         };
         return
     }
-    console.log(MD5(password))
     try{
         let nuser = await User.create({username,password:MD5(password),email})
         if(nuser){

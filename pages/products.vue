@@ -39,9 +39,11 @@
                 point: [116.397428, 39.90923]
             }
         },
+        methods:{
+
+        },
         async asyncData(ctx) {
             let keyword = ctx.query.keyword;
-            console.log(keyword);
 
             let city = '连云港';
 

@@ -24,9 +24,10 @@
         <span class="s-item-type">{{ meta.type }}</span>
         <span class="s-item-addr">{{ meta.addr }}</span>
       </p>
-      <p>
+      <p style="display: flex;justify-content: space-between; align-items: center;">
         <em class="s-item-price">￥{{ meta.price }}起</em>
-        <b>{{ meta.status }}</b>
+        <!--<b>{{ meta.status }}</b>-->
+        <el-button type="success" plain @click="addCart">加入购物车</el-button>
       </p>
       <ul>
         <!-- <li>
@@ -53,6 +54,24 @@ export default {
       type:Object,
       default(){
         return {}
+      }
+    }
+  },
+  methods:{
+    addCart:async function (){
+      console.log(this.meta);
+      let {status,data:{code,cartNo}} = await this.$axios.post('/cart/create',{
+        id: Math.random().toString().slice(3,9),
+        detail:{
+          name:this.meta.name,
+          img:this.meta.img,
+          price:this.meta.price
+        }
+      })
+      if(status === 200 && code === 0){
+        this.$router.push(`/cart?id=${cartNo}`)
+      }else {
+        console.log('购物车加入失败');
       }
     }
   }

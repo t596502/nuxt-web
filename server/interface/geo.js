@@ -1,5 +1,4 @@
 import Router from 'koa-router';
-import axios from './utils/axios'
 import Menu from '../dbs/models/Menu'
 import Province from '../dbs/models/province'
 import City from '../dbs/models/City'
