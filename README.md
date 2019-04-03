@@ -49,7 +49,7 @@
 git clone https://github.com/t596502/mt-web.git
 
 # 进入项目目录
-cd mt-web
+cd nuxt-web
 
 # 安装依赖
 npm install
