@@ -9,6 +9,10 @@ const Order = new Schema({
         type: Number,
         require: true
     },
+    count: {
+        type: Number,
+        require: true
+    },
     imgs: {
         type: String,
         require: true

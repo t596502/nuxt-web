@@ -13,10 +13,10 @@ export default {
             return 'smtp.qq.com'
         },
         get user(){
-            return '596502@qq.com'
+            return '' //邮箱
         },
         get pass(){
-            return 'xgqtirxtjgcdbgie' // 生成的授权码
+            return '' // 生成的授权码
         },
         get code(){
             return ()=> Math.random().toString(16).slice(2,6).toUpperCase()

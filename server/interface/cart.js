@@ -22,7 +22,8 @@ router.post('/create',async ctx=>{
             user:ctx.session.passport.user,
             detail:detail,
             time,
-            cartNo
+            cartNo,
+
         });
 
         const result = await cart.save();
@@ -59,10 +60,12 @@ router.post('/getCart',async ctx=>{
             const cart = await Cart.findOne({id})
             ctx.body={
                 code:0,
-                data:{detail: cart ? cart.detail[0] : {}}
+                data:{
+                    detail: cart ? cart.detail[0] : {},
+                    cart_id:cart.id
+                }
             }
         }catch(e){
-            console.log(e);
             ctx.body = {
                 code: -1,
                 data: {}

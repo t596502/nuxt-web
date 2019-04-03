@@ -5,7 +5,15 @@
             <categroy
                     :types="types"
                     :areas="areas"/>
-            <list :list="list"/>
+            <template v-if="is_login">
+                <list :list="list"/>
+            </template>
+            <template v-else>
+                <div class="no-login">
+                    <p>没有登录</p>
+                    <nuxt-link to="/login">去登录</nuxt-link>
+                </div>
+            </template>
         </el-col>
         <el-col :span="5">
             <amap
@@ -47,7 +55,7 @@
 
             let city = '连云港';
 
-            let {status, data: {list}} = await ctx.$axios.get('/search/top', {
+            let {status, data: {list,is_login}} = await ctx.$axios.get('/search/top', {
                 params: {
                     city,
                     list:1
@@ -60,6 +68,7 @@
                     keyword,
                     types: types.slice(0, 6),
                     areas,
+                    is_login,
                     list: list.map((item) => {
                         return {
                             type: item.type,
@@ -87,4 +96,12 @@
 
 <style lang="scss">
     @import "@/assets/css/products/index.scss";
+    .no-login{
+        min-height:400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+    }
 </style>

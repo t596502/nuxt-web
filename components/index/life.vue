@@ -37,7 +37,7 @@
                     <img
                             src="//s1.meituan.net/bs/fe-web-meituan/60ac9a0/img/download-qr.png"
                             alt="下载APP">
-                    <p>美团APP手机版</p>
+                    <p>APP手机版</p>
                     <h4><span class="red">1元起</span><em class="gary">吃喝玩乐</em></h4>
                 </div>
             </el-col>

@@ -4,7 +4,6 @@ import Poi from '../dbs/models/poi'
 const router = new Route({prefix: '/search'});
 
 router.get('/top',async (ctx)=>{
-    console.log(1);
     try{
         if(!ctx.query.city) {
             ctx.body={
@@ -17,7 +16,8 @@ router.get('/top',async (ctx)=>{
             let list = await Poi.find();
             ctx.body={
                 code:0,
-                list
+                list,
+                is_login:ctx.isAuthenticated()
             }
         }else {
             let top = await Poi.find({'name':new RegExp(ctx.query.input), city:ctx.query.city}).limit(10);
@@ -29,14 +29,15 @@ router.get('/top',async (ctx)=>{
             });
             ctx.body={
                 code:0,
-                top:newTop
+                top:newTop,
+                is_login:ctx.isAuthenticated()
             }
         }
 
     }catch (e) {
         ctx.body={
             code:-1,
-            top:'服务器繁忙，稍后重试'
+            msg:'服务器繁忙，稍后重试'
         }
     }
 })

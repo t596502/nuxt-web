@@ -3,7 +3,7 @@
         <el-row class="m-header-searchbar">
             <el-col :span="3" class="left">
                 <nuxt-link to="/">
-                    <img src="//s0.meituan.net/bs/fe-web-meituan/e5eeaef/img/logo.png" />
+                    <img src="../../../static/logo.png" height="244" width="530"/>
                 </nuxt-link>
             </el-col>
             <el-col :span="15" class="center">
@@ -43,13 +43,13 @@
                 <ul class="nav">
                     <li><nuxt-link
                             to="/"
-                            class="takeout">美团外卖</nuxt-link></li>
+                            class="takeout">外卖</nuxt-link></li>
                     <li><nuxt-link
                             to="/"
                             class="movie">猫眼电影</nuxt-link></li>
                     <li><nuxt-link
                             to="/"
-                            class="hotel">美团酒店</nuxt-link></li>
+                            class="hotel">酒店</nuxt-link></li>
                     <li><nuxt-link
                             to="/"
                             class="apartment">民宿/公寓</nuxt-link></li>

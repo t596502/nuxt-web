@@ -44,12 +44,12 @@ export default {
   },
   methods:{
     submit: async function(){
-      let {status,data:{code,id}}=await this.$axios.post('/order/createOrder',{
+      let {status,data:{code,orderId}}=await this.$axios.post('/order/createOrder',{
         count:this.cart[0].count,
-        id:this.cartNo
-      })
+        id:this.cart_id
+      });
       if(status==200&&code===0){
-        this.$alert(`恭喜您，已成功下单，订单号:${id}`,'下单成功',{
+        this.$alert(`恭喜您，已成功下单，订单号:${orderId}`,'下单成功',{
           confirmButtonText:'确定',
           callback:action=>{
             location.href='/order'
@@ -60,7 +60,7 @@ export default {
   },
   async asyncData(ctx){
     console.log(ctx.query.id);
-    let {status,data:{code,data:{detail}}}=await ctx.$axios.post('/cart/getCart',{
+    let {status,data:{code,data:{detail,cart_id}}}=await ctx.$axios.post('/cart/getCart',{
       id:ctx.query.id
     });
     if(status === 200 && code === 0){
@@ -68,8 +68,10 @@ export default {
       return {cart :[{
         name:detail.name,
         price:detail.price,
-        count:1
-      }]}
+        count:1,
+      }],
+        cart_id
+      }
     }else {
       console.log('没有获取到购物车数据');
     }

@@ -6,6 +6,7 @@ const _73c8331f = () => interopDefault(import('../pages/cart.vue' /* webpackChun
 const _2b03127a = () => interopDefault(import('../pages/changeCity.vue' /* webpackChunkName: "pages/changeCity" */))
 const _16437bc6 = () => interopDefault(import('../pages/exit.vue' /* webpackChunkName: "pages/exit" */))
 const _d69c460c = () => interopDefault(import('../pages/login.vue' /* webpackChunkName: "pages/login" */))
+const _38560b42 = () => interopDefault(import('../pages/order.vue' /* webpackChunkName: "pages/order" */))
 const _27c1bbe3 = () => interopDefault(import('../pages/products.vue' /* webpackChunkName: "pages/products" */))
 const _f7193cbc = () => interopDefault(import('../pages/register.vue' /* webpackChunkName: "pages/register" */))
 const _69eb8c3a = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
@@ -100,6 +101,10 @@ export function createRouter() {
       path: "/login",
       component: _d69c460c,
       name: "login"
+    }, {
+      path: "/order",
+      component: _38560b42,
+      name: "order"
     }, {
       path: "/products",
       component: _27c1bbe3,

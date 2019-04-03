@@ -6,12 +6,11 @@ let router = new Router({prefix: '/categroy'})
 
 router.post('/crumbs',async (ctx)=>{
     let result = await Categroy.findOne({city:ctx.request.body.city});
-    console.log(result);
     if (result) {
       ctx.body = {
           code:0,
           areas: result.areas,
-          types: result.types
+          types: result.types,
       }
     } else {
       ctx.body = {
